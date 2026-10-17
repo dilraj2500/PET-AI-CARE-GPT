@@ -50,7 +50,7 @@ def create_embeddings(request):
         loader = DirectoryLoader(pdf_directory, glob="*.pdf", loader_cls=PyPDFLoader)
             
         documents = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
         texts = text_splitter.split_documents(documents)
 
         vector_store = Chroma.from_documents(texts, embeddings, collection_metadata={"hnsw:space": "cosine"}, persist_directory="stores/pet_cosine")
